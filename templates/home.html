@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block head %}
+
+<p>Hello you are at the Home Page!</p>
+
+{% endblock %}
+
+{% block content %}
+<h1>Home Page</h1>
+
+    <!-- {% if current_user.is_authenticated %}
+        <h3>Hello {{ current_user.name }}!</h3>
+        <a href="{{ url_for('logout') }}">Logout</a><br>
+    {% else %}
+    <h3>Hello !</h3>
+    <a href="{{ url_for('signup') }}">Sign Up</a><br>
+    <a href="{{ url_for('login') }}">Login</a><br>
+    {% endif %} -->
+
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+
+<div class="home-container">
+
+        <div>
+            <h5>Rooms availabale: {{rooms_count}}</h5>
+        </div>
+
+        <div>
+            <h3>Rooms:</h3>
+            {% for room in rooms %}
+                <div>
+                    <span>Room hosted by @{{room.user.name}}</span>
+                    {% if current_user.id == room.Room.host_id %}
+                        <a href="{{ url_for('deleteRoom', id=room.Room.id) }}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    {% endif %}
+                    <h5>
+                        {{room.Room.id}} -- <a href="{{ url_for('room', id=room.Room.id) }}">{{room.Room.name}}</a>
+                    </h5>
+                    <small>{{room.Room.topic}}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            {% include "activity.html" %}
+        </div>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+<div>
+    <h5>Recent Activity</h5>
+    {% for message in room_messages %}
+        <div>
+
+            {% if current_user == message.user %}
+                <a href="{{ url_for('deleteMessage', id=message.id) }}">
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </a>
+            {% endif %}
+
+            <small>@{{message.user.name}} posted {{message.updated | timesince}}</small>
+            <small>at</small> <a href="{{ url_for('room', id=message.room_id) }}">{{message.room.name}}</a>
+            <p>{{message.body}}</p>
+            <hr>
+         </div>
+    {% endfor %}
+</div>

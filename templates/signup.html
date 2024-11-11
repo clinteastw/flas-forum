@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<h1>Sign Up</h1>
+
+    <!-- <form action="{{ url_for('signup') }}" method="POST">
+        <input type="text" name="username" placeholder="Username" required="required"><br>
+        <input type="password" name="password" placeholder="Password" required="required"><br>
+        <input type="email" name="email" placeholder="Email" required="required"><br>
+        <input type="submit" value="Sign Up">
+    </form> -->
+
+        <div class="container">
+        <form method="POST" class="form-signup">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", placeholder="User Name") }}<br>
+
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", placeholder="Email") }}<br>
+
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", placeholder="Password") }}<br>
+
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+{% endblock %}

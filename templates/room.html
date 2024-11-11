@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
+
+<div class="room-container">
+
+    <div>
+
+        <h1>{{room.name}}</h1>
+
+        <p>{{room.description}}</p>
+
+        <div class="comment-wrapper">
+            <h3>Conversation</h3>
+            <hr>
+
+            {% for message in room_messages %}
+                <div>
+
+                    {% if current_user == message.user %}
+                    <a href="{{ url_for('deleteMessage', id=message.id) }}">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                    {% endif %}
+
+                    <small>@{{message.user.name}} at {{message.updated | timesince}}</small>
+                    <p>{{message.body}}</p>
+                    <hr>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div class="comment-form">
+            <form method="POST" action="">
+                <input type="text" name="body" placeholder="Write your message here...">
+            </form>
+        </div>
+        <!-- <div class="input-group">
+            <span class="input-group-text">Write your massage</span>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div> -->
+        {% endif %}
+
+    </div>
+
+    <div>
+        <h3>Participants</h3>
+        <hr>
+
+        {% for user in participants.participants %}
+        <div>
+            <p>@{{user.name}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Room</h1>
+<div>
+    <form method="POST" action="">
+        <!-- {{form.as_p}} -->
+        {{ form.topic.label(class="form-label") }}
+        {{ form.topic(class="form-control", placeholder="Topic") }}<br>
+
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control", placeholder="Room Name") }}<br>
+
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control", placeholder="Description") }}<br>
+
+        <input type="Submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}
