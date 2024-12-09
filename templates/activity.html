@@ -1,18 +1,16 @@
-<div>
-    <h5>Recent Activity</h5>
+<div class="card bg-dark text-white p-3">
+    <h5 class="text-info">Recent Activity</h5>
     {% for message in room_messages %}
-        <div>
-
+    <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">@{{ message.user.name }} posted {{ message.updated | timesince }}</small>
             {% if current_user == message.user %}
-                <a href="{{ url_for('deleteMessage', id=message.id) }}">
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </a>
+            <a href="{{ url_for('delete_message', id=message.id) }}" class="btn btn-danger btn-sm">Delete</a>
             {% endif %}
-
-            <small>@{{message.user.name}} posted {{message.updated | timesince}}</small>
-            <small>at</small> <a href="{{ url_for('room', id=message.room_id) }}">{{message.room.name}}</a>
-            <p>{{message.body}}</p>
-            <hr>
-         </div>
+        </div>
+        <small>at <a href="{{ url_for('room', id=message.room_id) }}" class="text-info">{{ message.room.name }}</a></small>
+        <p class="mt-2">{{ message.body }}</p>
+        <hr class="bg-secondary">
+    </div>
     {% endfor %}
 </div>

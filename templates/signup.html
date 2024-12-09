@@ -3,29 +3,37 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white p-4">
+                <h1 class="text-center text-info">Sign Up</h1>
+                <form method="POST" class="mt-4">
+                    <!-- Поле "Username" -->
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label text-info") }}
+                        {{ form.username(class="form-control", placeholder="Enter your username") }}
+                    </div>
 
-<h1>Sign Up</h1>
+                    <!-- Поле "Email" -->
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label text-info") }}
+                        {{ form.email(class="form-control", placeholder="Enter your email") }}
+                    </div>
 
-    <!-- <form action="{{ url_for('signup') }}" method="POST">
-        <input type="text" name="username" placeholder="Username" required="required"><br>
-        <input type="password" name="password" placeholder="Password" required="required"><br>
-        <input type="email" name="email" placeholder="Email" required="required"><br>
-        <input type="submit" value="Sign Up">
-    </form> -->
+                    <!-- Поле "Password" -->
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label text-info") }}
+                        {{ form.password(class="form-control", placeholder="Enter your password") }}
+                    </div>
 
-        <div class="container">
-        <form method="POST" class="form-signup">
-            {{ form.username.label(class="form-label") }}
-            {{ form.username(class="form-control", placeholder="User Name") }}<br>
-
-            {{ form.email.label(class="form-label") }}
-            {{ form.email(class="form-control", placeholder="Email") }}<br>
-
-            {{ form.password.label(class="form-label") }}
-            {{ form.password(class="form-control", placeholder="Password") }}<br>
-
-            {{ form.submit(class="btn btn-primary") }}
-        </form>
+                    <!-- Кнопка отправки -->
+                    <div class="text-center">
+                        {{ form.submit(class="btn btn-info w-100") }}
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
+</div>
 {% endblock %}

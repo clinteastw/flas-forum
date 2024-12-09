@@ -1,13 +1,18 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-<form method="POST" action="">
-    <p>Are you sure you want to delete "{{obj}}"?</p>
-    
-    <a href="{{request.referrer}}">Go Back</a>
-    <input type="Submit" value="Confirm">
-</form>
-
-
+<div class="container my-5">
+    <div class="card bg-dark text-white p-4">
+        <h2 class="text-center text-warning">Confirm Deletion</h2>
+        <form method="POST" action="" class="mt-4 text-center">
+            <p class="mb-4">Are you sure you want to delete "<span class="text-info">{{ obj }}</span>"?</p>
+            
+            <!-- Кнопки -->
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ request.referrer }}" class="btn btn-secondary">Go Back</a>
+                <button type="submit" class="btn btn-danger">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

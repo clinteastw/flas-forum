@@ -1,9 +1,10 @@
-from flask import render_template, request, redirect, url_for, session, flash, make_response
-from flask_login import login_user, logout_user, current_user, login_required, UserMixin
-from forms import SignUpForm, RoomForm
-from sqlalchemy.orm import selectinload, joinedload, aliased
-from sqlalchemy import LABEL_STYLE_TABLENAME_PLUS_COL, LABEL_STYLE_DISAMBIGUATE_ONLY, desc
+from flask import (flash, make_response, redirect, render_template, request,
+                   session, url_for)
+from flask_login import (current_user, login_required, login_user,
+                         logout_user)
+from sqlalchemy.orm import aliased, joinedload, selectinload
 
+from forms import RoomForm, SignUpForm
 from models import *
 
 
@@ -132,7 +133,7 @@ def register_routes(app, db, bcrypt):
     
     @login_required
     @app.route('/create-room', methods=['POST', 'GET'])
-    def createRoom():
+    def create_room():
         form = RoomForm()
         if request.method == 'POST':
             topic_name = request.form.get('topic')
@@ -174,7 +175,7 @@ def register_routes(app, db, bcrypt):
             
     @login_required
     @app.route('/delete-message/<int:id>', methods=['POST', 'GET'])
-    def deleteMessage(id):
+    def delete_message(id):
         message = db.get_or_404(Message, id)
         
         if request.method == 'POST':
@@ -187,7 +188,7 @@ def register_routes(app, db, bcrypt):
     
     @login_required
     @app.route('/delete-room/<int:id>', methods=['POST', 'GET'])
-    def deleteRoom(id):
+    def delete_room(id):
         
         room = db.get_or_404(Room, id)
         
@@ -203,44 +204,3 @@ def register_routes(app, db, bcrypt):
         
         return render_template('delete.html', obj=room)
         
-                        
-    @app.template_filter('timesince')
-    def timesince(time=False):
-        
-        now = datetime.now()
-        if type(time) is int:
-            diff = now - datetime.fromtimestamp(time)
-        elif isinstance(time, datetime):
-            diff = now - time
-        elif not time:
-            diff = 0
-        second_diff = diff.seconds
-        day_diff = diff.days
-
-        if day_diff < 0:
-            return ''
-
-        if day_diff == 0:
-            if second_diff < 10:
-                return "just now"
-            if second_diff < 60:
-                return str(second_diff) + " seconds ago"
-            if second_diff < 120:
-                return "a minute ago"
-            if second_diff < 3600:
-                return str(second_diff // 60) + " minutes ago"
-            if second_diff < 7200:
-                return "an hour ago"
-            if second_diff < 86400:
-                return str(second_diff // 3600) + " hours ago"
-        if day_diff == 1:
-            return "Yesterday"
-        if day_diff < 7:
-            return str(day_diff) + " days ago"
-        if day_diff < 31:
-            return str(day_diff // 7) + " weeks ago"
-        if day_diff < 365:
-            return str(day_diff // 30) + " months ago"
-        return str(day_diff // 365) + " years ago"
-    
-            

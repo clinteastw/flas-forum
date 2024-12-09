@@ -1,8 +1,8 @@
 from flask import Flask, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
 
@@ -36,6 +36,9 @@ def create_app():
     
     from routes import register_routes
     register_routes(app, db, bcrypt)
+    
+    from filters import register_filters
+    register_filters(app)
     
     migrate = Migrate(app, db, compare_type=True)
     

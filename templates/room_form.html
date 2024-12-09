@@ -1,22 +1,31 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<div class="container my-5">
+    <div class="card bg-dark text-white p-4">
+        <h1 class="text-center text-info">Create or Edit Room</h1>
+        <form method="POST" action="" class="mt-4">
+            <!-- Поле "Topic" -->
+            <div class="mb-3">
+                {{ form.topic.label(class="form-label text-info") }}
+                {{ form.topic(class="form-control", placeholder="Enter the topic") }}
+            </div>
 
-<h1>Room</h1>
-<div>
-    <form method="POST" action="">
-        <!-- {{form.as_p}} -->
-        {{ form.topic.label(class="form-label") }}
-        {{ form.topic(class="form-control", placeholder="Topic") }}<br>
+            <!-- Поле "Room Name" -->
+            <div class="mb-3">
+                {{ form.name.label(class="form-label text-info") }}
+                {{ form.name(class="form-control", placeholder="Enter the room name") }}
+            </div>
 
-        {{ form.name.label(class="form-label") }}
-        {{ form.name(class="form-control", placeholder="Room Name") }}<br>
+            <!-- Поле "Description" -->
+            <div class="mb-3">
+                {{ form.description.label(class="form-label text-info") }}
+                {{ form.description(class="form-control", placeholder="Enter the description") }}
+            </div>
 
-        {{ form.description.label(class="form-label") }}
-        {{ form.description(class="form-control", placeholder="Description") }}<br>
-
-        <input type="Submit" value="Submit">
-    </form>
+            <!-- Кнопка отправки -->
+            <button type="submit" class="btn btn-info text-white w-100">Submit</button>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
