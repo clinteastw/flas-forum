@@ -3,11 +3,10 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from flask_login import UserMixin
-from sqlalchemy import Column, ForeignKey, Table, func, text
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy_utils import EmailType
+from sqlalchemy import ForeignKey, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app import Base, db
+from app import db
 
 
 class TimestampMixin:
